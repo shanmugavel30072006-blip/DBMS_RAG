@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>COSMOS Spacecraft Engineering DBMS & RAG Comprehensive Report</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 16mm 14mm 16mm 14mm;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.45;
+      font-size: 11.5px;
+      margin: 0;
+      padding: 0;
+    }
+    .header-banner {
+      border-bottom: 2.5px solid #2563eb;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: 21px;
+      color: #0f172a;
+      margin: 0 0 4px 0;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: 12px;
+      color: #475569;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .badge {
+      display: inline-block;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 11px;
+    }
+    h2 {
+      font-size: 14px;
+      color: #1e40af;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 3px;
+      page-break-after: avoid;
+      font-weight: 700;
+    }
+    h3 {
+      font-size: 12px;
+      color: #334155;
+      margin-top: 10px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+      font-weight: 700;
+    }
+    p, ul, ol {
+      margin-top: 3px;
+      margin-bottom: 6px;
+    }
+    li {
+      margin-bottom: 2px;
+    }
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 6px 0 10px 0;
+      font-size: 10.5px;
+      page-break-inside: avoid;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 4px 7px;
+      text-align: left;
+    }
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    code {
+      font-family: "Consolas", "Courier New", monospace;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      padding: 1px 3px;
+      border-radius: 3px;
+      font-size: 10px;
+    }
+    pre {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 10px;
+      line-height: 1.35;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      page-break-inside: avoid;
+      margin: 6px 0;
+    }
+    pre code {
+      background: none;
+      color: inherit;
+      padding: 0;
+    }
+    .diagram-box {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      padding: 8px 10px;
+      margin: 6px 0;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 9.5px;
+      line-height: 1.3;
+      page-break-inside: avoid;
+    }
+    .footer {
+      margin-top: 18px;
+      padding-top: 8px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 10px;
+      color: #64748b;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-banner">
+    <h1>COSMOS: Spacecraft Engineering Knowledge Management System</h1>
+    <div class="subtitle">
+      Comprehensive Academic & Technical Report &bull; Dual-Paradigm DBMS: Relational Integrity (PostgreSQL 16) + Vector Retrieval (pgvector) + Grounded LLM RAG
+    </div>
+    <div class="badge">
+      Official GitHub Repository: <a href="https://github.com/shanmugavel30072006-blip/DBMS_RAG">https://github.com/shanmugavel30072006-blip/DBMS_RAG</a>
+    </div>
+  </div>
+
+  <h2>1. Abstract & Executive Summary</h2>
+  <p>
+    Aerospace and spacecraft systems generate complex, heterogeneous, and critical documentation across missions (flight manuals, telemetry specs, anomaly registers, procedural handbooks). Searching across fragmented engineering knowledge bases with standard keyword search frequently fails to surface functional matches and lacks relational context.
+  </p>
+  <p>
+    <strong>COSMOS (AstroRAG)</strong> addresses this challenge through a unified <strong>Dual-Paradigm Database System</strong> combining traditional Relational Database Management Systems (PostgreSQL 16) with vector storage (pgvector). Rather than running isolated vector search services, COSMOS consolidates mission telemetry, documents, vector embeddings, anomaly registers, and tamper-evident audit logs inside a single ACID-compliant database engine. Retrieved context is synthesized using Google Gemini, producing verifiable, cited technical intelligence.
+  </p>
+
+  <h2>2. Problem Statement & Operational Objectives</h2>
+  <ul>
+    <li><strong>Relational Context Preservation:</strong> Maintain strict relationships between spacecraft missions, engineering disciplines, technical documents, and operational anomaly logs.</li>
+    <li><strong>Semantic Sub-Millisecond Retrieval:</strong> Enable dense vector similarity search across technical chunks without losing transactional database guarantees.</li>
+    <li><strong>Auditable Governance & Immutability:</strong> Ensure every document upload, revision change, status transition, and resolution is captured automatically via database triggers.</li>
+    <li><strong>LLM Hallucination Mitigation:</strong> Ground responses in authorized document excerpts with explicit citation badges.</li>
+  </ul>
+
+  <h2>3. End-to-End System Architecture</h2>
+  <div class="diagram-box">
++--------------------------------------------------------------------------------------------------+
+| CLIENT LAYER (Next.js 14 / React 18 / TailwindCSS Web Application)                               |
+|   - Knowledge Chat Interface   - Ingestion Portal   - Anomaly Register   - SQL / Telemetry Log   |
++--------------------------------------------------------------------------------------------------+
+                                           │ (HTTP / JSON / Session Cookies)
+                                           ▼
++--------------------------------------------------------------------------------------------------+
+| APPLICATION SERVER LAYER (Node.js / Next.js Server Route Handlers)                               |
+|   - Authentication Engine (scrypt password hashing & HMAC-SHA256 session verification)           |
+|   - Document Parser & Windowed Chunker                                                           |
+|   - AES-256-GCM User Provider Key Encryption Engine                                              |
+|   - RAG Synthesis & Prompt Construction Module                                                   |
++--------------------------------------------------------------------------------------------------+
+              │                                                     │
+              ▼ (Top-K Chunks + Citation Prompt)                     ▼ (Parameterized SQL Queries)
++------------------------------------+             +-----------------------------------------------+
+| EXTERNAL LLM LAYER                 |             | DATABASE LAYER (PostgreSQL 16 + pgvector)     |
+|   - Google Gemini 2.5 Flash API    |             |   - Relational Tables (3NF Schema)            |
+|   - Grounded Technical Generation  |             |   - pgvector 384-dimensional Embeddings       |
+|   - Verifiable Document Citations  |             |   - HNSW Cosine Index (m=16, ef_construct=64) |
++------------------------------------+             |   - Automated Database Triggers & Views       |
+                                                   +-----------------------------------------------+
+  </div>
+
+  <h2>4. Dual-Paradigm Database Architecture</h2>
+  <p>
+    <strong>1. Relational Paradigm:</strong> Implements 3NF relational schemas with ACID transactions (<code>BEGIN / COMMIT / ROLLBACK</code>). Document ingestion and chunk vectorization occur within a single transaction boundary, ensuring zero orphaned records upon failure. Foreign key cascades delete chunks when a document is removed, while user and subsystem foreign keys use <code>ON DELETE SET NULL</code> to preserve incident logs.<br>
+    <strong>2. Vector Paradigm (pgvector):</strong> Dense 384-dimensional vectors represent normalized text chunks. Cosine distance (<code>&lt;=&gt;</code>) measures semantic angle: <code>D(u, v) = 1 - (u &bull; v)</code>. HNSW indexes ensure fast logarithmic-time retrieval over millions of records.
+  </p>
+
+  <h2>5. Entity-Relationship Model & Data Dictionary</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Table Name</th>
+        <th>Primary Key / Constraints</th>
+        <th>Foreign Key Relationships</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>users</code></td>
+        <td><code>user_id SERIAL PK</code>, <code>username UNIQUE</code></td>
+        <td>Self-contained</td>
+        <td>User credentials (scrypt salted hash) & department metadata</td>
+      </tr>
+      <tr>
+        <td><code>spacecraft_missions</code></td>
+        <td><code>mission_id SERIAL PK</code>, <code>mission_code UNIQUE</code></td>
+        <td>Referenced by documents and anomalies</td>
+        <td>Spacecraft programs (e.g. Artemis, Europa Clipper)</td>
+      </tr>
+      <tr>
+        <td><code>subsystems</code></td>
+        <td><code>subsystem_id SERIAL PK</code>, <code>code UNIQUE</code></td>
+        <td><code>lead_engineer_id -> users(user_id)</code></td>
+        <td>Engineering areas (Propulsion, Avionics, Thermal, ECLSS)</td>
+      </tr>
+      <tr>
+        <td><code>engineering_documents</code></td>
+        <td><code>document_id SERIAL PK</code>, <code>doc_type CHECK</code></td>
+        <td><code>mission_id</code>, <code>subsystem_id</code>, <code>uploaded_by</code></td>
+        <td>Master engineering documents and flight manuals</td>
+      </tr>
+      <tr>
+        <td><code>document_chunks</code></td>
+        <td><code>chunk_id UUID PK</code>, <code>embedding vector(384)</code></td>
+        <td><code>document_id -> engineering_documents CASCADE</code></td>
+        <td>Windowed text chunks with dense vector embeddings</td>
+      </tr>
+      <tr>
+        <td><code>anomalies_incidents</code></td>
+        <td><code>anomaly_id SERIAL PK</code>, <code>anomaly_code UNIQUE</code></td>
+        <td><code>mission_id</code>, <code>subsystem_id</code>, <code>reported_by</code></td>
+        <td>Mission incidents, severity levels, and root cause resolutions</td>
+      </tr>
+      <tr>
+        <td><code>audit_logs</code></td>
+        <td><code>log_id BIGSERIAL PK</code>, <code>details JSONB</code></td>
+        <td><code>user_id -> users(user_id) SET NULL</code></td>
+        <td>Immutable operational audit trail for document & auth events</td>
+      </tr>
+      <tr>
+        <td><code>user_providers</code></td>
+        <td><code>user_id PK</code>, <code>encrypted_key TEXT</code></td>
+        <td><code>user_id -> users(user_id) CASCADE</code></td>
+        <td>AES-256-GCM encrypted API keys & provider preferences</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>6. Advanced Database Features Implementation</h2>
+
+  <h3>6.1 Vector Retrieval Stored Function (PL/pgSQL)</h3>
+  <pre><code>CREATE OR REPLACE FUNCTION match_spacecraft_knowledge(
+    query_embedding vector(384),
+    match_threshold float DEFAULT 0.12,
+    match_count int DEFAULT 5,
+    filter_subsystem_id int DEFAULT NULL,
+    filter_mission_id int DEFAULT NULL
+)
+RETURNS TABLE (
+    chunk_id UUID, document_id INT, document_title VARCHAR, file_name VARCHAR,
+    subsystem_code VARCHAR, mission_code VARCHAR, chunk_text TEXT, similarity FLOAT, metadata JSONB
+)
+LANGUAGE plpgsql AS $$
+BEGIN
+    RETURN QUERY
+    SELECT dc.chunk_id, d.document_id, d.title AS document_title, d.file_name,
+           COALESCE(s.code, 'GENERAL')::VARCHAR AS subsystem_code,
+           COALESCE(m.mission_code, 'GENERAL')::VARCHAR AS mission_code,
+           dc.chunk_text, (1 - (dc.embedding &lt;=&gt; query_embedding))::FLOAT AS similarity, dc.metadata
+    FROM document_chunks dc
+    JOIN engineering_documents d ON dc.document_id = d.document_id
+    LEFT JOIN subsystems s ON d.subsystem_id = s.subsystem_id
+    LEFT JOIN spacecraft_missions m ON d.mission_id = m.mission_id
+    WHERE (1 - (dc.embedding &lt;=&gt; query_embedding)) &gt;= match_threshold
+      AND (filter_subsystem_id IS NULL OR d.subsystem_id = filter_subsystem_id)
+      AND (filter_mission_id IS NULL OR d.mission_id = filter_mission_id)
+    ORDER BY dc.embedding &lt;=&gt; query_embedding ASC LIMIT match_count;
+END; $$;</code></pre>
+
+  <h3>6.2 Automated Database Triggers</h3>
+  <ul>
+    <li><strong><code>trg_audit_document_lifecycle</code>:</strong> Attached to <code>engineering_documents</code> on <code>BEFORE INSERT OR UPDATE</code>. Automatically writes an audit row to <code>audit_logs</code> capturing document title, status, version changes, and chunk count as structured JSONB.</li>
+    <li><strong><code>trg_update_anomaly_ts</code>:</strong> Attached to <code>anomalies_incidents</code> on <code>BEFORE UPDATE</code> to update the <code>updated_at</code> timestamp automatically upon incident status changes.</li>
+  </ul>
+
+  <h3>6.3 Aggregated Views</h3>
+  <ul>
+    <li><strong><code>vw_subsystem_readiness_summary</code>:</strong> Combines 5 tables to report total documents, indexed vectors, open anomalies, and critical incidents per subsystem via <code>COUNT(...) FILTER (WHERE ...)</code>.</li>
+    <li><strong><code>vw_document_vector_stats</code>:</strong> Summarizes chunk volume, total token counts, and vectorization status per document.</li>
+    <li><strong><code>vw_anomaly_impact_matrix</code>:</strong> Groups incidents across missions and subsystems by severity and resolution window.</li>
+  </ul>
+
+  <h3>6.4 Complex & Correlated Queries</h3>
+  <pre><code>-- Correlated subquery to sync chunk totals from child table
+UPDATE engineering_documents d
+SET chunk_count = (SELECT COUNT(*) FROM document_chunks c WHERE c.document_id = d.document_id);
+
+-- Single-roundtrip multi-table dashboard metrics
+SELECT (SELECT COUNT(*) FROM engineering_documents) AS total_documents,
+       (SELECT COUNT(*) FROM document_chunks) AS total_chunks,
+       (SELECT COALESCE(SUM(token_count), 0) FROM document_chunks) AS total_tokens,
+       (SELECT COUNT(*) FROM spacecraft_missions) AS total_missions,
+       (SELECT COUNT(*) FROM anomalies_incidents WHERE status IN ('OPEN','INVESTIGATING')) AS active_anomalies;</code></pre>
+
+  <h2>7. Retrieval-Augmented Generation (RAG) Workflow</h2>
+  <ol>
+    <li><strong>User Query:</strong> Engineer enters a technical question in the chat interface.</li>
+    <li><strong>Embedding:</strong> Server computes a 384-dimensional vector representation of the query.</li>
+    <li><strong>Vector Search:</strong> PostgreSQL evaluates the query vector against <code>document_chunks</code> using HNSW cosine distance.</li>
+    <li><strong>Evidence Injection:</strong> Top-K retrieved chunks are formatted with document titles and metadata.</li>
+    <li><strong>Grounded Synthesis:</strong> Server invokes Google Gemini 2.5 Flash with strict instructions: answers must be derived solely from the provided context chunks and accompanied by source citations.</li>
+  </ol>
+
+  <h2>8. Security, Cryptography, & Governance</h2>
+  <ul>
+    <li><strong>Scrypt Password Hashing:</strong> Passwords are never stored in plaintext. They are salted with 16 random bytes and hashed using <code>scrypt</code> with a 64-byte key length. Comparisons use <code>crypto.timingSafeEqual</code> to prevent timing attacks.</li>
+    <li><strong>HMAC-SHA256 Session Cookies:</strong> Stateless tokens (<code>&lt;payload&gt;.&lt;signature&gt;</code>) stored in <code>httpOnly</code>, <code>sameSite: 'lax'</code> secure cookies.</li>
+    <li><strong>AES-256-GCM API Key Storage:</strong> User Gemini API keys are encrypted at rest using AES-256-GCM with authentication tags.</li>
+  </ul>
+
+  <h2>9. Test Cases & Validation Results</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Test Description</th>
+        <th>Methodology</th>
+        <th>Expected Result</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>TC-01</td>
+        <td>Database Extension Check</td>
+        <td><code>/api/health</code> query</td>
+        <td><code>vector</code> &amp; <code>uuid-ossp</code> active; pgvector 0.8.7</td>
+        <td><strong>PASS</strong></td>
+      </tr>
+      <tr>
+        <td>TC-02</td>
+        <td>Scrypt Password Hashing</td>
+        <td>Unit test <code>tests/unit.mjs</code></td>
+        <td>Reject bad password; verify correct; constant-time check</td>
+        <td><strong>PASS</strong></td>
+      </tr>
+      <tr>
+        <td>TC-03</td>
+        <td>Session Tampering Protection</td>
+        <td>Mutate signature byte</td>
+        <td>Session rejected; returns <code>null</code></td>
+        <td><strong>PASS</strong></td>
+      </tr>
+      <tr>
+        <td>TC-04</td>
+        <td>Audit Log Trigger</td>
+        <td>Insert document row</td>
+        <td>Trigger writes <code>DOCUMENT_INGESTION</code> JSONB record</td>
+        <td><strong>PASS</strong></td>
+      </tr>
+      <tr>
+        <td>TC-05</td>
+        <td>Cascading Chunk Deletion</td>
+        <td>Delete parent document</td>
+        <td>Foreign key cascade removes all associated vector chunks</td>
+        <td><strong>PASS</strong></td>
+      </tr>
+      <tr>
+        <td>TC-06</td>
+        <td>Vector Cosine Retrieval</td>
+        <td>Execute <code>match_spacecraft_knowledge</code></td>
+        <td>Returns top matching chunks ordered by similarity</td>
+        <td><strong>PASS</strong></td>
+      </tr>
+      <tr>
+        <td>TC-07</td>
+        <td>AES-256-GCM Key Encryption</td>
+        <td>Store user Gemini key</td>
+        <td>Saved as ciphertext <code>iv:tag:cipher</code>; plaintext never logged</td>
+        <td><strong>PASS</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>10. Conclusion</h2>
+  <p>
+    The COSMOS platform demonstrates how an enterprise relational database (PostgreSQL 16) can be expanded into an intelligent semantic retrieval engine using pgvector. By enforcing relational integrity, automated triggers, aggregated views, and LLM grounding, the project provides a performant, auditable, and reliable foundation for aerospace engineering operations.
+  </p>
+
+  <div class="footer">
+    Report authored for Cosmos DBMS &amp; RAG Project &bull; GitHub: <a href="https://github.com/shanmugavel30072006-blip/DBMS_RAG">https://github.com/shanmugavel30072006-blip/DBMS_RAG</a>
+  </div>
+
+</body>
+</html>
